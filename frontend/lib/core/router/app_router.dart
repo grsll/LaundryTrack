@@ -4,8 +4,10 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/login_screen.dart';
 import '../../features/auth/presentation/register_screen.dart';
 import '../../features/auth/providers/auth_provider.dart';
+import '../../features/customers/presentation/customer_list_screen.dart';
 import '../../features/dashboard/presentation/dashboard_screen.dart';
 import '../../features/health/presentation/health_screen.dart';
+import '../../features/services/presentation/service_list_screen.dart';
 
 class RouterNotifier extends ChangeNotifier {
   final Ref _ref;
@@ -65,6 +67,16 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/dashboard',
         name: 'dashboard',
         builder: (context, state) => const DashboardScreen(),
+      ),
+      GoRoute(
+        path: '/customers',
+        name: 'customers',
+        builder: (context, state) => const CustomerListScreen(),
+      ),
+      GoRoute(
+        path: '/services',
+        name: 'services',
+        builder: (context, state) => const ServiceListScreen(),
       ),
       GoRoute(
         path: '/health',

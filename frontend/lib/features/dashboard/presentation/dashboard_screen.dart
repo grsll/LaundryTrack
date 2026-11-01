@@ -149,6 +149,59 @@ class DashboardScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: 24),
 
+                // Operational Quick Action Cards (Phase 2 Master Data)
+                const Text(
+                  'Manajemen Operasional',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppTheme.textPrimary),
+                ),
+                const SizedBox(height: 12),
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    final isMobile = constraints.maxWidth < 600;
+                    final actionCards = [
+                      _QuickActionCard(
+                        title: 'Data Pelanggan',
+                        subtitle: 'Pencatatan pelanggan, kontak WhatsApp, & preferensi laundry',
+                        icon: Icons.people_alt_outlined,
+                        color: AppTheme.primaryBlue,
+                        buttonText: 'Buka Data Pelanggan',
+                        onTap: () => context.push('/customers'),
+                      ),
+                      _QuickActionCard(
+                        title: 'Katalog Layanan',
+                        subtitle: 'Daftar tarif cuci kiloan (per kg) & satuan (per pcs)',
+                        icon: Icons.dry_cleaning_outlined,
+                        color: AppTheme.successGreen,
+                        buttonText: 'Buka Katalog Layanan',
+                        onTap: () => context.push('/services'),
+                      ),
+                    ];
+
+                    if (isMobile) {
+                      return Column(
+                        children: actionCards
+                            .map((card) => Padding(
+                                  padding: const EdgeInsets.only(bottom: 12.0),
+                                  child: card,
+                                ))
+                            .toList(),
+                      );
+                    }
+
+                    return Row(
+                      children: actionCards
+                          .map((card) => Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                                  child: card,
+                                ),
+                              ))
+                          .toList(),
+                    );
+                  },
+                ),
+                const SizedBox(height: 24),
+
                 // Active Session Info Card
                 Card(
                   child: Padding(
@@ -251,6 +304,68 @@ class _InfoRow extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _QuickActionCard extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final Color color;
+  final String buttonText;
+  final VoidCallback onTap;
+
+  const _QuickActionCard({
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.color,
+    required this.buttonText,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 1,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  backgroundColor: color.withAlpha(25),
+                  child: Icon(icon, color: color),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppTheme.textPrimary),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              subtitle,
+              style: const TextStyle(fontSize: 12, color: AppTheme.textSecondary),
+            ),
+            const SizedBox(height: 14),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton(
+                onPressed: onTap,
+                child: Text(buttonText),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

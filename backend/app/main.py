@@ -9,6 +9,8 @@ from app.core.database import engine, check_db_health
 from app.core.exceptions import AppException
 from app.modules.health.router import router as health_router
 from app.modules.auth.router import router as auth_router
+from app.modules.customers.router import router as customers_router
+from app.modules.services.router import router as services_router
 
 # Configure logging
 logging.basicConfig(
@@ -92,6 +94,8 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
 # Mount Routers
 app.include_router(health_router, prefix=settings.API_V1_PREFIX)
 app.include_router(auth_router, prefix=settings.API_V1_PREFIX)
+app.include_router(customers_router, prefix=settings.API_V1_PREFIX)
+app.include_router(services_router, prefix=settings.API_V1_PREFIX)
 
 
 @app.get("/", tags=["Root"])

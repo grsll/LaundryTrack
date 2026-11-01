@@ -19,6 +19,8 @@ from app.modules.outlets.models import Outlet  # noqa
 from app.modules.users.models import User, TenantUser, OutletUser  # noqa
 from app.modules.subscriptions.models import Subscription  # noqa
 from app.modules.auth.models import RefreshToken  # noqa
+from app.modules.customers.models import Customer  # noqa
+from app.modules.services.models import Service  # noqa
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
