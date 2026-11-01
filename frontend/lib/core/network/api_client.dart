@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../constants/app_constants.dart';
+import 'auth_interceptor.dart';
 
 final dioProvider = Provider<Dio>((ref) {
   const String apiHost = String.fromEnvironment(
@@ -21,10 +22,14 @@ final dioProvider = Provider<Dio>((ref) {
     ),
   );
 
+  // Attach Auth Interceptor
+  dio.interceptors.add(AuthInterceptor());
+
+  // Attach Logging Interceptor (without logging sensitive credentials/bodies)
   dio.interceptors.add(
     LogInterceptor(
-      requestBody: true,
-      responseBody: true,
+      requestBody: false,
+      responseBody: false,
       logPrint: (obj) => debugPrint('[Dio] $obj'),
     ),
   );

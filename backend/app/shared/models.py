@@ -46,3 +46,11 @@ class TenantMixin:
         index=True,
         nullable=False,
     )
+
+
+__all__ = [
+    "Base",
+    "UUIDMixin",
+    "TimestampMixin",
+    "TenantMixin",
+]

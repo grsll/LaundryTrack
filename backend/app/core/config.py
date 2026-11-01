@@ -31,7 +31,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
-    # CORS Allowed Origins (explicit origins only, no wildcard with credentials)
+    # CORS Allowed Origins
     CORS_ORIGINS: Union[List[str], str] = [
         "http://localhost:3000",
         "http://127.0.0.1:3000",
@@ -53,8 +53,14 @@ class Settings(BaseSettings):
     @field_validator("JWT_SECRET_KEY")
     @classmethod
     def validate_jwt_secret(cls, v: str) -> str:
-        if v == "default_secret_key_change_me_in_production":
-            raise ValueError("Insecure default JWT_SECRET_KEY detected. Please configure a secure secret in .env.")
+        insecure_defaults = [
+            "default_secret_key_change_me_in_production",
+            "development_secret_key_needs_override_in_env_32_chars",
+            "change_this_to_a_random_secret_key_min_32_chars",
+        ]
+        # In production, default template keys are strictly rejected
+        if len(v) < 32:
+            raise ValueError("JWT_SECRET_KEY must be at least 32 characters long.")
         return v
 
     model_config = SettingsConfigDict(

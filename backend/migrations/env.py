@@ -14,6 +14,11 @@ if str(backend_dir) not in sys.path:
 
 from app.core.config import settings
 from app.shared.models import Base
+from app.modules.tenants.models import Tenant  # noqa
+from app.modules.outlets.models import Outlet  # noqa
+from app.modules.users.models import User, TenantUser, OutletUser  # noqa
+from app.modules.subscriptions.models import Subscription  # noqa
+from app.modules.auth.models import RefreshToken  # noqa
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

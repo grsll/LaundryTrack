@@ -12,6 +12,9 @@ class AppException(HTTPException):
         code: str = "INTERNAL_ERROR",
         details: Optional[Any] = None,
     ):
+        self.code = code
+        self.message = message
+        self.details = details
         super().__init__(
             status_code=status_code,
             detail={
