@@ -18,7 +18,7 @@ class CustomerRepository {
       'page': 1,
       'page_size': 50,
       if (query != null && query.isNotEmpty) 'q': query,
-      if (isActive != null) 'is_active': isActive,
+      'is_active': ?isActive,
     };
 
     final response = await _dio.get(

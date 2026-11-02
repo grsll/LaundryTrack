@@ -28,3 +28,4 @@ class Outlet(Base, UUIDMixin, TimestampMixin):
     # Relationships
     tenant = relationship("Tenant", back_populates="outlets")
     outlet_users = relationship("OutletUser", back_populates="outlet", cascade="all, delete-orphan")
+    orders = relationship("Order", back_populates="outlet")

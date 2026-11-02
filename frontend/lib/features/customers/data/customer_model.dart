@@ -47,4 +47,11 @@ class CustomerModel {
       if (notes != null && notes!.isNotEmpty) 'notes': notes,
     };
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || (other is CustomerModel && other.id == id);
+
+  @override
+  int get hashCode => id.hashCode;
 }

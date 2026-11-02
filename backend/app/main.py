@@ -11,6 +11,7 @@ from app.modules.health.router import router as health_router
 from app.modules.auth.router import router as auth_router
 from app.modules.customers.router import router as customers_router
 from app.modules.services.router import router as services_router
+from app.modules.orders.router import router as orders_router
 
 # Configure logging
 logging.basicConfig(
@@ -96,6 +97,7 @@ app.include_router(health_router, prefix=settings.API_V1_PREFIX)
 app.include_router(auth_router, prefix=settings.API_V1_PREFIX)
 app.include_router(customers_router, prefix=settings.API_V1_PREFIX)
 app.include_router(services_router, prefix=settings.API_V1_PREFIX)
+app.include_router(orders_router, prefix=settings.API_V1_PREFIX)
 
 
 @app.get("/", tags=["Root"])

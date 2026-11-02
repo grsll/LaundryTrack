@@ -36,3 +36,4 @@ class Customer(Base, UUIDMixin, TimestampMixin):
 
     # Relationships
     tenant = relationship("Tenant", back_populates="customers")
+    orders = relationship("Order", back_populates="customer")

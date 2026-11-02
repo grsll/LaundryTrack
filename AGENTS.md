@@ -47,9 +47,9 @@ Before marking any major feature, refactor, or bug fix complete:
 
 ---
 
-## 4. Mandatory Post-Task Markdown Documentation
+## 4. Mandatory Post-Task Markdown Documentation (Per-Project)
 
-Every task completion must produce a post-task markdown file in `.ai/tasks/` with format `YYYY-MM-DD_<topic>.md`:
+Every task completion must produce a post-task markdown file in the workspace master memory at `/home/huawei-matebook-d14/.ai/tasks/laundry/` with format `YYYY-MM-DD_<topic>.md` (auto-create the folder via `rtk mkdir -p /home/huawei-matebook-d14/.ai/tasks/laundry/` if it does not exist):
 - **Format:**
   1. Ringkasan Tugas & Konteks
   2. Alur Analisis / Root Cause

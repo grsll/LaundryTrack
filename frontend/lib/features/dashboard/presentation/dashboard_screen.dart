@@ -160,10 +160,18 @@ class DashboardScreen extends ConsumerWidget {
                     final isMobile = constraints.maxWidth < 600;
                     final actionCards = [
                       _QuickActionCard(
+                        title: 'Kasir & Pesanan',
+                        subtitle: 'Pencatatan nota pesanan baru (kiloan/satuan) & siklus status',
+                        icon: Icons.point_of_sale_outlined,
+                        color: AppTheme.primaryBlue,
+                        buttonText: 'Kelola Pesanan',
+                        onTap: () => context.push('/orders'),
+                      ),
+                      _QuickActionCard(
                         title: 'Data Pelanggan',
                         subtitle: 'Pencatatan pelanggan, kontak WhatsApp, & preferensi laundry',
                         icon: Icons.people_alt_outlined,
-                        color: AppTheme.primaryBlue,
+                        color: AppTheme.successGreen,
                         buttonText: 'Buka Data Pelanggan',
                         onTap: () => context.push('/customers'),
                       ),
@@ -171,7 +179,7 @@ class DashboardScreen extends ConsumerWidget {
                         title: 'Katalog Layanan',
                         subtitle: 'Daftar tarif cuci kiloan (per kg) & satuan (per pcs)',
                         icon: Icons.dry_cleaning_outlined,
-                        color: AppTheme.successGreen,
+                        color: AppTheme.warningOrange,
                         buttonText: 'Buka Katalog Layanan',
                         onTap: () => context.push('/services'),
                       ),

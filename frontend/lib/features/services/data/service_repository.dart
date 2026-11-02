@@ -23,7 +23,7 @@ class ServiceRepository {
       'page_size': 100,
       if (query != null && query.isNotEmpty) 'q': query,
       if (priceType != null && priceType != 'all') 'price_type': priceType,
-      if (isActive != null) 'is_active': isActive,
+      'is_active': ?isActive,
     };
 
     final response = await _dio.get(

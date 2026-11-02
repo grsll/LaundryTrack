@@ -7,6 +7,8 @@ import '../../features/auth/providers/auth_provider.dart';
 import '../../features/customers/presentation/customer_list_screen.dart';
 import '../../features/dashboard/presentation/dashboard_screen.dart';
 import '../../features/health/presentation/health_screen.dart';
+import '../../features/orders/presentation/order_create_screen.dart';
+import '../../features/orders/presentation/order_list_screen.dart';
 import '../../features/services/presentation/service_list_screen.dart';
 
 class RouterNotifier extends ChangeNotifier {
@@ -15,7 +17,7 @@ class RouterNotifier extends ChangeNotifier {
   RouterNotifier(this._ref) {
     _ref.listen<AuthState>(
       authProvider,
-      (_, __) => notifyListeners(),
+      (_, _) => notifyListeners(),
     );
   }
 
@@ -77,6 +79,16 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/services',
         name: 'services',
         builder: (context, state) => const ServiceListScreen(),
+      ),
+      GoRoute(
+        path: '/orders',
+        name: 'orders',
+        builder: (context, state) => const OrderListScreen(),
+      ),
+      GoRoute(
+        path: '/orders/create',
+        name: 'orders_create',
+        builder: (context, state) => const OrderCreateScreen(),
       ),
       GoRoute(
         path: '/health',

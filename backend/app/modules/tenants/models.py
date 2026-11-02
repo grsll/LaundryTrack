@@ -21,3 +21,4 @@ class Tenant(Base, UUIDMixin, TimestampMixin):
     subscription = relationship("Subscription", back_populates="tenant", uselist=False, cascade="all, delete-orphan")
     customers = relationship("Customer", back_populates="tenant", cascade="all, delete-orphan")
     services = relationship("Service", back_populates="tenant", cascade="all, delete-orphan")
+    orders = relationship("Order", back_populates="tenant", cascade="all, delete-orphan")

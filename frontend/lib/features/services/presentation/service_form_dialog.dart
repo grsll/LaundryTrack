@@ -144,7 +144,7 @@ class _ServiceFormDialogState extends State<ServiceFormDialog> {
 
                   // Price Type Selector
                   DropdownButtonFormField<String>(
-                    value: _priceType,
+                    initialValue: _priceType,
                     decoration: const InputDecoration(
                       labelText: 'Jenis Penetapan Harga *',
                       prefixIcon: Icon(Icons.category_outlined),
