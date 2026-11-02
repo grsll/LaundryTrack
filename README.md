@@ -75,3 +75,4 @@ Frontend akan terbuka di browser: `http://localhost:3000`
 - [ ] **Phase 6:** Portal Pelanggan
 - [ ] **Phase 7:** Dashboard, Laporan, dan SaaS
 - [ ] **Phase 8:** Audit dan Deployment
+# LaundryApps
