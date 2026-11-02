@@ -1,4 +1,4 @@
-from typing import AsyncGenerator, Callable, List
+from typing import Any, AsyncGenerator, Callable, List
 import uuid
 from fastapi import Depends, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
@@ -156,8 +156,15 @@ async def get_current_outlet(
     return outlet
 
 
-def require_roles(*allowed_roles: str) -> Callable:
+def require_roles(*roles: Any) -> Callable:
     """Dependency factory checking if current user holds one of the required roles."""
+    allowed_roles: List[str] = []
+    for r in roles:
+        if isinstance(r, (list, tuple, set)):
+            allowed_roles.extend(str(item) for item in r)
+        else:
+            allowed_roles.append(str(r))
+
     async def role_checker(current_user: User = Depends(get_current_user)) -> User:
         payload = getattr(current_user, "_token_payload", {})
         user_role = payload.get("role")

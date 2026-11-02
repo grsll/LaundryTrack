@@ -8,6 +8,7 @@ import 'package:frontend/features/orders/presentation/order_create_screen.dart';
 import 'package:frontend/features/orders/presentation/order_detail_dialog.dart';
 import 'package:frontend/features/orders/presentation/order_list_screen.dart';
 import 'package:frontend/features/orders/providers/order_provider.dart';
+import 'package:frontend/features/payments/providers/payment_provider.dart';
 import 'package:frontend/features/services/data/service_model.dart';
 import 'package:frontend/features/services/providers/service_provider.dart';
 
@@ -319,6 +320,7 @@ void main() {
         ProviderScope(
           overrides: [
             orderDetailProvider('ord-detail-1').overrideWith((ref) => sampleDetail),
+            orderPaymentsProvider('ord-detail-1').overrideWith((ref) => Future.value([])),
           ],
           child: const MaterialApp(
             home: Scaffold(

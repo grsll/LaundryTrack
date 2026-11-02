@@ -1,12 +1,15 @@
 from datetime import datetime, timezone
 from decimal import Decimal
 import enum
-from typing import List, Optional
+from typing import TYPE_CHECKING, List, Optional
 import uuid
 import sqlalchemy as sa
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.shared.models import Base, TimestampMixin, UUIDMixin
+
+if TYPE_CHECKING:
+    from app.modules.payments.models import Payment, Refund
 
 
 class OrderStatus(str, enum.Enum):
@@ -147,6 +150,18 @@ class Order(Base, UUIDMixin, TimestampMixin):
         back_populates="order",
         cascade="all, delete-orphan",
         order_by="OrderStatusLog.created_at",
+    )
+    payments: Mapped[List["Payment"]] = relationship(
+        "Payment",
+        back_populates="order",
+        cascade="all, delete-orphan",
+        order_by="Payment.paid_at",
+    )
+    refunds: Mapped[List["Refund"]] = relationship(
+        "Refund",
+        back_populates="order",
+        cascade="all, delete-orphan",
+        order_by="Refund.refunded_at",
     )
 
 

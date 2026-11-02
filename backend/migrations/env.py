@@ -22,6 +22,7 @@ from app.modules.auth.models import RefreshToken  # noqa
 from app.modules.customers.models import Customer  # noqa
 from app.modules.services.models import Service  # noqa
 from app.modules.orders.models import Order, OrderItem, OrderStatusLog, OrderSequence  # noqa
+from app.modules.payments.models import Payment, Refund  # noqa
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

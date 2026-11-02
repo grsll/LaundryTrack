@@ -413,6 +413,11 @@ class OrderService:
             raise BadRequestException("Pesanan yang sudah selesai (completed) tidak dapat dibatalkan.")
         if order.status == OrderStatus.CANCELLED.value:
             raise BadRequestException("Pesanan ini sudah berstatus dibatalkan.")
+        if order.paid_amount > Decimal("0.00"):
+            raise BadRequestException(
+                f"Pesanan memiliki saldo pembayaran aktif sebesar Rp{order.paid_amount:,.2f}. "
+                "Lakukan pengembalian dana (refund) terlebih dahulu sebelum membatalkan pesanan."
+            )
 
         clean_reason = reason.strip()
         if not clean_reason:
