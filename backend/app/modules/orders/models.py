@@ -10,6 +10,7 @@ from app.shared.models import Base, TimestampMixin, UUIDMixin
 
 if TYPE_CHECKING:
     from app.modules.payments.models import Payment, Refund
+    from app.modules.receipts.models import ReceiptLog
 
 
 class OrderStatus(str, enum.Enum):
@@ -125,6 +126,23 @@ class Order(Base, UUIDMixin, TimestampMixin):
         sa.DateTime(timezone=True),
         nullable=True,
     )
+    tracking_token: Mapped[str] = mapped_column(
+        sa.String(64),
+        unique=True,
+        index=True,
+        server_default=sa.text("md5(random()::text || clock_timestamp()::text)"),
+        nullable=False,
+    )
+    receipt_printed_at: Mapped[Optional[datetime]] = mapped_column(
+        sa.DateTime(timezone=True),
+        nullable=True,
+    )
+    reprint_count: Mapped[int] = mapped_column(
+        sa.Integer,
+        default=0,
+        server_default=sa.text("0"),
+        nullable=False,
+    )
 
     # Composite indexes
     __table_args__ = (
@@ -162,6 +180,12 @@ class Order(Base, UUIDMixin, TimestampMixin):
         back_populates="order",
         cascade="all, delete-orphan",
         order_by="Refund.refunded_at",
+    )
+    receipt_logs: Mapped[List["ReceiptLog"]] = relationship(
+        "ReceiptLog",
+        back_populates="order",
+        cascade="all, delete-orphan",
+        order_by="ReceiptLog.created_at.desc()",
     )
 
 

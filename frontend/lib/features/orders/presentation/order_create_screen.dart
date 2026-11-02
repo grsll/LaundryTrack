@@ -6,6 +6,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../customers/data/customer_model.dart';
 import '../../customers/presentation/customer_form_dialog.dart';
 import '../../customers/providers/customer_provider.dart';
+import '../../receipts/presentation/receipt_dialog.dart';
 import '../../services/data/service_model.dart';
 import '../../services/providers/service_provider.dart';
 import '../data/order_model.dart';
@@ -141,7 +142,13 @@ class _OrderCreateScreenState extends ConsumerState<OrderCreateScreen> {
             backgroundColor: AppTheme.successGreen,
           ),
         );
-        context.pop();
+        final navigator = Navigator.of(context);
+        navigator.pop();
+        // Prompt receipt dialog for instant cashier printing or sharing
+        showDialog(
+          context: navigator.context,
+          builder: (_) => ReceiptShareDialog(orderId: createdOrder.id),
+        );
       } else if (mounted) {
         final err = ref.read(orderProvider).errorMessage ?? 'Gagal membuat pesanan';
         ScaffoldMessenger.of(context).showSnackBar(

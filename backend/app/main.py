@@ -13,6 +13,8 @@ from app.modules.customers.router import router as customers_router
 from app.modules.services.router import router as services_router
 from app.modules.orders.router import router as orders_router
 from app.modules.payments.router import router as payments_router
+from app.modules.tracking.router import router as tracking_router
+from app.modules.receipts.router import router as receipts_router
 
 # Configure logging
 logging.basicConfig(
@@ -100,6 +102,8 @@ app.include_router(customers_router, prefix=settings.API_V1_PREFIX)
 app.include_router(services_router, prefix=settings.API_V1_PREFIX)
 app.include_router(orders_router, prefix=settings.API_V1_PREFIX)
 app.include_router(payments_router, prefix=settings.API_V1_PREFIX)
+app.include_router(tracking_router, prefix=settings.API_V1_PREFIX)
+app.include_router(receipts_router, prefix=settings.API_V1_PREFIX)
 
 
 @app.get("/", tags=["Root"])

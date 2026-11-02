@@ -48,7 +48,7 @@ async def check_db_health() -> bool:
         async with AsyncSessionLocal() as session:
             result = await asyncio.wait_for(
                 session.execute(text("SELECT 1")),
-                timeout=3.0,
+                timeout=5.0,
             )
             return result.scalar() == 1
     except Exception as e:

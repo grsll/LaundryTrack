@@ -108,6 +108,9 @@ class OrderResponse(BaseModel):
     notes: Optional[str] = None
     cancellation_reason: Optional[str] = None
     cancelled_at: Optional[datetime] = None
+    tracking_token: Optional[str] = None
+    receipt_printed_at: Optional[datetime] = None
+    reprint_count: int = 0
     items_count: int = 0
     created_at: datetime
     updated_at: datetime

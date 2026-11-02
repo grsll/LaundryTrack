@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
 from decimal import Decimal
+import secrets
 from typing import List, Optional, Tuple
 import uuid
 
@@ -181,6 +182,7 @@ class OrderService:
             total_amount=total_amount,
             paid_amount=paid_amount,
             remaining_amount=remaining_amount,
+            tracking_token=secrets.token_urlsafe(32),
             notes=payload.notes.strip() if payload.notes else None,
         )
 

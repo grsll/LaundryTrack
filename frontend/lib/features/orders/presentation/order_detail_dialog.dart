@@ -5,6 +5,7 @@ import '../../payments/data/payment_model.dart';
 import '../../payments/presentation/payment_form_dialog.dart';
 import '../../payments/presentation/refund_form_dialog.dart';
 import '../../payments/providers/payment_provider.dart';
+import '../../receipts/presentation/receipt_dialog.dart';
 import '../data/order_model.dart';
 import '../providers/order_provider.dart';
 
@@ -474,6 +475,16 @@ class _OrderDetailDialogState extends ConsumerState<OrderDetailDialog> {
                 runSpacing: 8,
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
+                  OutlinedButton.icon(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (_) => ReceiptShareDialog(orderId: order.id),
+                      );
+                    },
+                    icon: const Icon(Icons.receipt_long, size: 18),
+                    label: const Text('Nota & Tracking'),
+                  ),
                   TextButton(
                     onPressed: () => Navigator.of(context).pop(),
                     child: const Text('Tutup'),
